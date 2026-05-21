@@ -1,0 +1,37 @@
+appId: com.pixens.launcher
+productName: Pixens
+copyright: (c) Pixens
+directories:
+  buildResources: build
+  output: dist
+files:
+  - out/**/*
+  - package.json
+# The Realms game is NOT bundled — the launcher downloads it on demand
+# (see ARCHITECTURE.md "Realms packaging + update manifest").
+# ffmpeg / extraResources REMOVED 2026-05-22: in-launcher viral clip
+# capture dropped. Users record with OBS / NVIDIA ShadowPlay / Win+G
+# Game Bar / Discord. Cuts ~82 MB from the installer + drops the LGPL
+# inheritance ffmpeg-static was forcing on this repo (we're now MIT).
+win:
+  target:
+    - nsis
+  icon: build/icon.ico
+  artifactName: Pixens-Setup-${version}.${ext}
+# oneClick = NO Windows wizard pages: a brief silent progress, then it
+# launches straight into OUR branded UI (the user never sees a Windows-
+# style installer). Still creates shortcuts + uninstall entry + supports
+# auto-update. One UAC elevation (perMachine, for Program Files).
+nsis:
+  oneClick: true
+  perMachine: true
+  runAfterFinish: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Pixens
+  uninstallDisplayName: Pixens
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+publish:
+  provider: generic
+  url: https://pixens.io/launcher

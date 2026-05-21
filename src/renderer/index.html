@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pixens</title>
+    <style>
+      html, body { margin: 0; background: #000; }
+      /* C1 (brains #159a): NO transform-scale. The fixed-surface JS
+         fitApp() that scaled .app (capped ≤1 → centered "cube" when
+         maximized) is removed. The launcher is now a genuinely fluid
+         layout — see .stage/.app in launcher-overrides.css. */
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+/* PIXENS Launcher — desktop overrides.
+   The Claude Design bundle is a web-style fixed 1280x800 rounded CARD
+   floating on a letterbox backdrop (.stage #050310 + glows, .app radius
+   + shadow). In a desktop launcher window that reads as "the app is a
+   small box on a black/empty background". Here the app IS the window:
+   edge-to-edge, brand background, no floating-card chrome.
+   Imported AFTER styles.css in main.jsx so these win the cascade. */
+
+html, body { background: var(--pix-bg) !important; }
+
+/* C1 (brains #159a) — FLUID fill, NOT a transform-scaled fixed surface.
+   Claude Design ships .app as a fixed 1280×800 box; index.html used to
+   JS-scale it (capped ≤1) so a maximized window showed a centered
+   "cube" with brand bg around it (uncapped would've been "x100 zoom").
+   No scale value satisfies "fill the window + keep element sizes" for a
+   fixed surface — the only correct answer is a genuinely fluid layout:
+   the scale script is removed (index.html) and the surface is made
+   viewport-filling so the existing flex children (titlebar/topbar ·
+   sidebar/main/chat-rail) redistribute to fill at CONSTANT element
+   sizes. Battle.net-style: same sizes, content just spreads. */
+.stage {
+  background: var(--pix-bg) !important;   /* kill the #050310 letterbox + glows */
+  display: block !important;              /* was grid + place-items:center → cube */
+  place-items: initial !important;
+}
+
+.app {
+  width: 100% !important;                 /* was var(--app-w) = 1280px */
+  height: 100% !important;                /* was var(--app-h) = 800px  */
+  transform: none !important;             /* belt-and-braces vs any leftover JS scale() */
+  border-radius: 0 !important;            /* not a floating card — fills the window */
+  box-shadow: none !important;
+}
+
+/* persistent right chat rail — always visible, full height */
+.app .body { display: flex !important; min-height: 0; flex: 1; }
+.app .body > .main { flex: 1 1 auto; min-width: 0; }
+.app .chat-rail {
+  flex: 0 0 320px; width: 320px;
+  display: flex; flex-direction: column; min-height: 0;
+  border-left: 1px solid var(--pix-line);
+  background: var(--pix-bg);
+}
+.app .chat-rail-hd {
+  flex: 0 0 38px; height: 38px; display: flex; align-items: center; gap: 8px;
+  padding: 0 14px; border-bottom: 1px solid var(--pix-line);
+  font-family: var(--font-pixel); font-size: 9px; letter-spacing: .16em;
+  color: var(--pix-ink-3);
+}
+.app .chat-rail-dot { width: 8px; height: 8px; background: var(--pix-lime); box-shadow: 0 0 8px var(--pix-lime); display: inline-block; }
+.app .chat-rail webview { flex: 1; min-height: 0; width: 100%; }
+
+/* floating mascot (login / register screen) */
+@keyframes pxl-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+.pxl-float { animation: pxl-float 4.5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .pxl-float { animation: none; } }

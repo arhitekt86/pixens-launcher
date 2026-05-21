@@ -1,0 +1,39 @@
+{
+  "name": "pixens-launcher",
+  "version": "0.1.6",
+  "description": "PIXENS — unified game launcher (Realms native + Defense/Block Arena web)",
+  "main": "out/main/index.js",
+  "author": "Pixens",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://pixens.io",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "dist": "electron-vite build && electron-builder --win",
+    "dist:dir": "electron-vite build && electron-builder --win --dir"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "vite": "^5.4.10",
+    "@vitejs/plugin-react": "^4.3.3",
+    "typescript": "^5.6.3",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.14",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "electron-updater": "^6.3.9",
+    "@supabase/supabase-js": "^2.45.4",
+    "@fontsource/press-start-2p": "^5.1.0",
+    "@fontsource/vt323": "^5.1.0",
+    "extract-zip": "^2.0.1"
+  }
+}
